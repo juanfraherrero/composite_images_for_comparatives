@@ -1,0 +1,28 @@
+
+images: [
+  [ '/home/juan/Documentos/AAUniversidad/tesis/Administrativo/proyecto final/images/selectedOBJ/image1.png',
+    '/home/juan/Documentos/AAUniversidad/tesis/Administrativo/proyecto final/images/selectedOBJ/image2.png',
+    '/home/juan/Documentos/AAUniversidad/tesis/Administrativo/proyecto final/images/selectedOBJ/image3.png',
+    '/home/juan/Documentos/AAUniversidad/tesis/Administrativo/proyecto final/images/selectedOBJ/image4.png'
+    ],
+  [ '/home/juan/Documentos/AAUniversidad/tesis/Administrativo/proyecto final/images/selectedOBJ/image5.png',
+    '/home/juan/Documentos/AAUniversidad/tesis/Administrativo/proyecto final/images/selectedOBJ/image6.png',
+    '/home/juan/Documentos/AAUniversidad/tesis/Administrativo/proyecto final/images/selectedOBJ/image7.png',
+    '/home/juan/Documentos/AAUniversidad/tesis/Administrativo/proyecto final/images/selectedOBJ/image8.png'
+    ],
+  [ '/home/juan/Documentos/AAUniversidad/tesis/Administrativo/proyecto final/images/selectedOBJ/image9.png',
+    '/home/juan/Documentos/AAUniversidad/tesis/Administrativo/proyecto final/images/selectedOBJ/image10.png',
+    '/home/juan/Documentos/AAUniversidad/tesis/Administrativo/proyecto final/images/selectedOBJ/image11.png',
+    '/home/juan/Documentos/AAUniversidad/tesis/Administrativo/proyecto final/images/selectedOBJ/image12.png'
+    ]
+  ]
+
+column_names: [
+  small,
+  medium,
+  large
+]
+
+output: "composite_result"
+
+size: 600
