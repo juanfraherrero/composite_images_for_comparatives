@@ -1,8 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import yaml
 
-# #### CAMBIAR  
-
 ### NO CAMBIAR
 # Cargar el archivo YAML
 with open('config.yaml', 'r') as file:
