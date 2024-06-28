@@ -56,14 +56,24 @@ jobs:
 
     - name: Create executable with PyInstaller
       run: |
-        pyinstaller --onefile --windowed ui.py
+        pyinstaller --onefile --windowed app.py
 
-    - name: Archive executable
-      uses: actions/upload-artifact@v4
+    # - name: Archive executable
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: executable-ubuntu
+    #     path: dist/
+    #     overwrite: true
+
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
       with:
-        name: executable-ubuntu
-        path: dist/
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: dist/app
+        asset_name: Composite_images
+        tag: ${{ github.ref }}
         overwrite: true
+        body: "Composite Image application"
 
   # build-windows:
   #   runs-on: windows-latest
