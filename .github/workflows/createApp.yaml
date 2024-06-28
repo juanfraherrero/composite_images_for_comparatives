@@ -48,6 +48,6 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: executable-${{ matrix.os }}
-        path: dist/: 
+        path: dist/
         overwrite: true
         compression-level: 0
