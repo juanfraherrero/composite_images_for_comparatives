@@ -1,5 +1,4 @@
 altgraph==0.17.4
-certifi @ file:///croot/certifi_1671487769961/work/certifi
 importlib-metadata==6.7.0
 packaging==24.0
 Pillow==9.5.0
