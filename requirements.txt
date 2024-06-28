@@ -2,7 +2,7 @@ altgraph==0.17.4
 distlib==0.3.8
 filelock==3.12.2
 identify==2.5.24
-importlib-metadata==6.7.0
+importlib-metadata
 mypy-extensions==0.4.3
 nodeenv==1.9.1
 packaging==24.0
