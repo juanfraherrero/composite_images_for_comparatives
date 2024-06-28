@@ -71,7 +71,7 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: dist/app
         asset_name: Composite_images
-        tag: "Ubuntu realese"
+        tag: "Ubuntu_Realese"
         overwrite: true
         body: "Composite Image application"
 
