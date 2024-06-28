@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 permissions: # only allow the minimum required access
-  contents: read
+  contents: write
 
 jobs:
   # checks:
