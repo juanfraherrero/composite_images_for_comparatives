@@ -52,7 +52,7 @@ draw = ImageDraw.Draw(new_image)
 
 # Definir la fuente para los nombres de las columnas
 try:
-    font = ImageFont.truetype("arial.ttf", column_name_height)
+    font = ImageFont.truetype("font.ttf", column_name_height)
     print("Font loaded successfully")
 except IOError:
     font = ImageFont.load_default()

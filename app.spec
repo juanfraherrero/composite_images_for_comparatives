@@ -5,10 +5,10 @@ block_cipher = None
 
 
 a = Analysis(
-    ['app.py', 'clear'],
+    ['app.py'],
     pathex=[],
     binaries=[],
-    datas=[('arial.ttf', '.')],
+    datas=[('font.ttf', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

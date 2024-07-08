@@ -1,4 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
+import sys
+import os
 
 
 # Función para recortar la imagen desde el centro
@@ -19,6 +21,15 @@ def safe_open_image(image_path, size):
         return crop_center(Image.open(image_path), (size, size))
     except (IOError, FileNotFoundError):
         return None
+
+
+def get_resource_path(relative_path):
+    """Get the absolute path to the resource"""
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 
 def generateComposite(images, size, column_names, output) -> None:
@@ -47,7 +58,7 @@ def generateComposite(images, size, column_names, output) -> None:
 
     # Definir la fuente para los nombres de las columnas
     try:
-        font = ImageFont.truetype("arial.ttf", col_name_height)
+        font = ImageFont.truetype(get_resource_path("font.ttf"), col_name_height)
         print("Font loaded successfully")
     except IOError:
         font = ImageFont.load_default()
