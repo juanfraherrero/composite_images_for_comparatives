@@ -4,3 +4,6 @@ max-line-length = 127
 max-complexity = 10
 count = True
 statistics = True
+
+[tool:pytest]
+addopts = --black
