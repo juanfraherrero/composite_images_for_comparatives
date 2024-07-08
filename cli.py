@@ -5,8 +5,16 @@ from PIL import Image, ImageDraw, ImageFont
 with open("config.yaml", "r") as file:
     config = yaml.safe_load(file)
 
+if config["images"] is None:
+    print("No images found")
+    exit()
 
-# Función para recortar la imagen al centro
+if len(config["images"]) != len(config["column_names"]):
+    print("The number of titles does not match the number of columns")
+    exit()
+
+
+# Recortar la imagen desde el centro
 def crop_center(image, crop_size):
     width, height = image.size
     new_width, new_height = crop_size
@@ -18,19 +26,19 @@ def crop_center(image, crop_size):
 
 
 images = [
-    [crop_center(Image.open(image_path), (600, 600)) for image_path in row]
+    [
+        crop_center(Image.open(image_path), (config["size"], config["size"]))
+        for image_path in row
+    ]
     for row in config["images"]
 ]
 
-# Asumimos que todas las imágenes tienen el mismo tamaño
+# Todas las imágenes tienen el mismo tamaño
 width, height = config["size"], config["size"]
 
 cant_columns = len(images)
-cant_rows = len(
-    max(images, key=len)
-)  # obtener la mayopr cantidad de imagenes en una columnas
+cant_rows = len(max(images, key=len))
 
-# Definir espacio entre imágenes y altura para los nombres de las columnas
 spacing = 10
 column_name_height = 64
 
@@ -49,13 +57,8 @@ try:
 except IOError:
     font = ImageFont.load_default()
 
-# Nombres de las columnas
-column_names = config["column_names"]
-
-print("total size", total_width, total_height)
-
 # Dibujar los nombres de las columnas
-for index, column in enumerate(column_names):
+for index, column in enumerate(config["column_names"]):
     draw.text(
         (
             (width + spacing) * (index)
@@ -71,16 +74,15 @@ for index, column in enumerate(column_names):
 # Pegar las imágenes en la nueva imagen
 for i in range(cant_rows):
     for j in range(cant_columns):
-        new_image.paste(
-            images[j][i],
-            (
-                j * (width + spacing) + spacing,
-                column_name_height + spacing + i * (height + spacing),
-            ),
-        )
+        if j < len(images) and i < len(images[j]) and images[j][i] is not None:
+            new_image.paste(
+                images[j][i],
+                (
+                    j * (width + spacing) + spacing,
+                    column_name_height + spacing + i * (height + spacing),
+                ),
+            )
 
 # Guardar la nueva imagen
 new_image.save(config["output"] + ".jpg")
-
-# Mostrar la nueva imagen (opcional)
 new_image.show()

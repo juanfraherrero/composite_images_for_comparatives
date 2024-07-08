@@ -130,15 +130,8 @@ class CompositeImagesApp:
             files = entry.get().split(", ")
             if files:
                 images_paths.append(files)
-
         column_names = [entry.get() for entry in self.column_name_entries]
-
         generateComposite(images_paths, size, column_names, output)
-        print("Resultado:", output)
-        print("Arreglo de imágenes seleccionadas:", images_paths)
-        print("Tamaño de las imágenes:", size)
-        print("Nombres de las columnas:", column_names)
-        # Aquí puedes llamar a tu función para procesar las imágenes
 
 
 if __name__ == "__main__":

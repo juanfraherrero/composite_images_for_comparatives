@@ -1,33 +1,37 @@
 from PIL import Image, ImageDraw, ImageFont
 
 
+# Función para recortar la imagen desde el centro
+def crop_center(image, crop_size):
+    width, height = image.size
+    new_width, new_height = crop_size
+    left = (width - new_width) / 2
+    top = (height - new_height) / 2
+    right = (width + new_width) / 2
+    bottom = (height + new_height) / 2
+    return image.crop((left, top, right, bottom))
+
+
+def safe_open_image(image_path, size):
+    if image_path == "":
+        return None
+    try:
+        return crop_center(Image.open(image_path), (size, size))
+    except (IOError, FileNotFoundError):
+        return None
+
+
 def generateComposite(images, size, column_names, output) -> None:
-
-    # Función para recortar la imagen desde centro
-    def crop_center(image, crop_size):
-        width, height = image.size
-        new_width, new_height = crop_size
-        left = (width - new_width) / 2
-        top = (height - new_height) / 2
-        right = (width + new_width) / 2
-        bottom = (height + new_height) / 2
-        return image.crop((left, top, right, bottom))
-
     images = [
-        [
-            crop_center(Image.open(image_path), (size, size))
-            for image_path in image_paths
-        ]
+        [safe_open_image(image_path, size) for image_path in image_paths]
         for image_paths in images
     ]
 
-    # Asumimos que todas las imágenes tienen el mismo tamaño
+    # Todas las imágenes tienen el mismo tamaño
     width, height = size, size
 
     cant_columns = len(images)
-    cant_rows = len(
-        max(images, key=len)
-    )  # obtener la mayopr cantidad de imagenes en una columnas
+    cant_rows = len(max(images, key=len))
 
     spacing = 10  # Definir espacio entre imágenes
     col_name_height = 64  # Definir altura de los nombres de las columnas
@@ -65,7 +69,9 @@ def generateComposite(images, size, column_names, output) -> None:
     # Pegar las imágenes en la nueva imagen
     for i in range(cant_rows):
         for j in range(cant_columns):
-            if images[j][i] is not None:  # Si hay una imagen en esa posición
+            if (
+                j < len(images) and i < len(images[j]) and images[j][i] is not None
+            ):  # Si hay una imagen en esa posición y si no estoy fuera de índice
                 new_image.paste(
                     images[j][i],
                     (
@@ -76,6 +82,4 @@ def generateComposite(images, size, column_names, output) -> None:
 
     # Guardar la nueva imagen
     new_image.save(output)
-
-    # Mostrar la nueva imagen (opcional)
     new_image.show()
