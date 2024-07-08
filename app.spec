@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(
-    ['app.py'],
+    ['app.py', 'clear'],
     pathex=[],
     binaries=[],
     datas=[('arial.ttf', '.')],
